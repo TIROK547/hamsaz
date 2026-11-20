@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#183e42">
-  <title>راهنمای انتخاب ایده برای هم‌ساز | چهار طرح برای یک تیم سه‌نفره</title>
+  <meta name="theme-color" content="#153e41">
+  <title>هم‌ساز | انتخاب ایده و راهنمای ساخت در ۲۰ روز</title>
   <style>
     :root {
-      --paper: #f8f7f2;
+      --paper: #f6f6ef;
       --surface: #fffefa;
-      --ink: #192e30;
-      --muted: #506462;
-      --teal: #185759;
-      --dark: #183e42;
-      --line: #cbd2c9;
-      --tint: #e5eee7;
-      --ochre: #815722;
+      --ink: #193436;
+      --muted: #536760;
+      --dark: #153e41;
+      --teal: #17605a;
+      --line: #cbd5c9;
+      --tint: #e7efe7;
+      --gold: #865728;
     }
     * { box-sizing: border-box; }
     body {
@@ -24,197 +24,205 @@
       color: var(--ink);
       font: 1rem/1.95 "Vazirmatn", "Noto Sans Arabic", Tahoma, sans-serif;
     }
-    .wrap { width: min(100% - 3rem, 1120px); margin-inline: auto; }
-    h1, h2, h3, h4, p, dl, dd, blockquote { margin: 0; }
-    h1, h2 {
-      font-family: "Noto Naskh Arabic", Georgia, Tahoma, serif;
-      line-height: 1.45;
-      text-wrap: balance;
-    }
-    h1 { font-size: clamp(2.4rem, 5.6vw, 4.8rem); }
-    h2 { font-size: clamp(1.8rem, 3.5vw, 2.55rem); }
-    h3 { font-size: 1.16rem; line-height: 1.7; }
-    h4, dt { font-weight: 700; }
-    a { color: var(--teal); text-decoration-thickness: 1px; text-underline-offset: .29em; }
+    .wrap { width: min(calc(100% - 3rem), 1020px); margin-inline: auto; }
+    .mast { background: var(--dark); color: white; }
+    .imprint { display: flex; justify-content: space-between; gap: .6rem 1rem; flex-wrap: wrap; padding-block: .85rem; }
+    .imprint span { color: #d7e5d8; font-size: .88rem; }
+    main { padding-bottom: 2.8rem; }
+    a { color: var(--teal); text-underline-offset: .25em; }
     a:hover { text-decoration-thickness: 2px; }
-    a:focus-visible { outline: 3px solid #bf792b; outline-offset: 4px; }
-    :target { scroll-margin-top: 1.5rem; }
-    .skip { position: absolute; inset-inline-start: 1rem; top: -6rem; z-index: 3; }
-    .skip:focus { top: 1rem; padding: .4rem 1rem; background: white; }
-    .mast { background: var(--dark); color: white; padding: 1rem 0 2.5rem; }
-    .imprint, .contents, .citations { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem 1.1rem; }
-    .imprint { justify-content: space-between; color: #d2e2da; font-size: .88rem; border-bottom: 1px solid #507174; padding-bottom: .9rem; }
-    .imprint strong { color: white; font-size: 1.05rem; }
-    .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(200px, .36fr); gap: 4rem; align-items: center; padding-top: 2.1rem; }
-    .hero p { max-width: 59ch; color: #eef4ed; margin-top: .6rem; }
-    .dates { border-inline-start: 2px solid #dbbb80; padding-inline-start: 1.4rem; }
-    .dates div + div { margin-top: .9rem; }
-    .dates dt { color: #d2e2da; font-size: .83rem; font-weight: 400; }
-    .dates dd { font-size: 1.38rem; font-weight: 700; }
-    .contents { padding-block: .85rem; border-bottom: 1px solid var(--line); font-size: .92rem; gap: .35rem 1.5rem; }
-    .contents a { text-decoration: none; padding-block: .2rem; }
-    .contents a:hover { text-decoration: underline; }
-    main { padding-bottom: 2.5rem; }
-    section { margin-top: 3rem; }
-    .intro { max-width: 78ch; margin: .25rem 0 1.25rem; color: var(--muted); }
-    .comparison { border-block: 2px solid var(--dark); }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { text-align: start; vertical-align: top; padding: .68rem .85rem; }
+    :is(a, button, summary):focus-visible { outline: 3px solid #b87b29; outline-offset: 4px; }
+    h1, h2, h3, p, blockquote { margin: 0; }
+    h1, .choice h3 { font-family: "Noto Naskh Arabic", Georgia, Tahoma, serif; line-height: 1.48; }
+    h1 { font-size: clamp(2.25rem, 5.5vw, 4rem); text-wrap: balance; }
+    .hero { padding: 2rem 0 1.4rem; }
+    .hero p { color: var(--muted); max-width: 72ch; }
+    .compare-link { display: inline-block; margin-top: .7rem; }
+    .section-title { font-size: clamp(1.24rem, 3vw, 1.6rem); margin-bottom: .7rem; }
+    .comparison { margin-top: 2rem; scroll-margin-top: 1rem; }
+    .comparison > p { color: var(--muted); }
+    .comparison th, .comparison td { vertical-align: top; padding: .85rem; }
+    .comparison th:first-child { width: 20%; }
+    .comparison td { width: 40%; }
+    .cell-label { display: none; }
+    .choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .choice {
+      display: flex; flex-direction: column; align-items: flex-start; position: relative;
+      padding: clamp(1.1rem, 2.2vw, 1.6rem); background: var(--surface);
+      border: 1px solid var(--line); border-top: 3px solid var(--teal);
+    }
+    .choice:focus-within, .choice:hover { border-color: var(--teal); }
+    .field { font-size: .82rem; color: var(--gold); font-weight: 700; }
+    .choice h3 { font-size: 1.58rem; margin: .15rem 0 .4rem; }
+    .need { font-size: .92rem; color: var(--muted); padding: .6rem 0 1rem; }
+    .need strong { color: var(--ink); margin-inline-end: .3rem; }
+    .open-guide { margin-top: auto; font-weight: 700; }
+    .open-guide span { display: inline-block; margin-inline-start: .3rem; }
+    .open-guide::after { content: ""; position: absolute; inset: 0; }
+    .assumption { margin-top: 1rem; font-size: .94rem; color: var(--muted); }
+    .screen { display: none; }
+    .screen:target, .screen:has(:target) { display: block; }
+    main:has(.screen:target, .screen :target) .chooser { display: none; }
+    .screen, .chooser { outline: 0; }
+    .tools { display: flex; align-items: center; justify-content: space-between; gap: .7rem; flex-wrap: wrap; padding-block: .9rem; border-bottom: 1px solid var(--line); }
+    button { background: var(--surface); border: 1px solid var(--line); color: var(--teal); border-radius: .3rem; padding: .25rem .75rem; cursor: pointer; font: inherit; font-size: .88rem; }
+    .guide { width: min(100%, 820px); margin-inline: auto; }
+    .guide header { padding-block: 1.6rem 1.35rem; border-bottom: 2px solid var(--teal); }
+    .intro { color: var(--muted); font-size: 1.08rem; margin-top: .4rem; }
+    .guide h2 { font-size: clamp(1.24rem, 2.7vw, 1.5rem); margin: 1.8rem 0 .45rem; }
+    .guide h3 { font-size: 1rem; }
+    .guide > p + p, .guide table + p { margin-top: .7rem; }
+    .guide ol:not(.timeline), .submission ul { padding-inline-start: 1.5rem; margin-block: .6rem; }
+    .guide li + li, .submission li + li { margin-top: .4rem; }
+    .roles, blockquote { padding: .8rem 1rem; background: var(--tint); border-inline-start: 3px solid var(--teal); }
+    blockquote { margin-block: .8rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: .9rem; background: var(--surface); }
+    th, td { padding: .5rem .6rem; text-align: start; border-bottom: 1px solid var(--line); }
     thead { background: var(--tint); }
-    tbody tr + tr { border-top: 1px solid var(--line); }
-    .pick { margin-top: 1.1rem; padding: 1rem 1.25rem; background: var(--tint); border-inline-start: 4px solid var(--teal); }
-    .ideas-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin-top: 1rem; }
-    .idea { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--teal); padding: 1.35rem; }
-    .idea header { border-bottom: 1px solid var(--line); padding-bottom: .75rem; }
-    .field { color: var(--ochre); font-size: .82rem; font-weight: 700; }
-    .idea p, .idea dl { margin-top: .85rem; }
-    .idea dt { margin-top: .6rem; font-size: .9rem; }
-    .citations { font-size: .82rem; margin-top: .95rem; gap: .3rem 1rem; }
-    .demo { padding: clamp(1rem, 3vw, 2.2rem); background: #ecf1eb; border: 1px solid #c5d3c7; }
-    blockquote { padding: .45rem 1rem; border-inline-start: 3px solid var(--ochre); margin-block: 1rem; color: var(--dark); }
-    .demo table { background: var(--surface); }
-    .demo h3 { margin-top: 1.3rem; }
-    .demo p + p { margin-top: .6rem; }
-    .roles { padding: 1rem 1.2rem; border-block: 1px solid var(--line); margin: 1rem 0; }
-    .timeline { list-style: none; padding: 0; margin: 0; }
-    .timeline li { display: grid; grid-template-columns: 9rem 1fr; gap: 1.2rem; padding: 1rem .2rem; border-bottom: 1px solid var(--line); }
+    .timeline { list-style: none; margin: 0; padding: 0; }
+    .timeline li { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; border-bottom: 1px solid var(--line); padding: .8rem 0; }
     .timeline strong { color: var(--teal); }
-    .timeline p { max-width: 78ch; }
-    .submission { padding: 1.4rem; background: var(--surface); border-top: 3px solid var(--dark); }
-    .submission ul { padding-inline-start: 1.4rem; margin: .7rem 0; }
-    .submission li + li { margin-top: .5rem; }
-    footer { padding: 1.2rem 0; border-top: 1px solid var(--line); }
-    @media (max-width: 700px) {
-      .wrap { width: min(100% - 2rem, 1120px); }
-      .hero, .ideas-grid { grid-template-columns: 1fr; gap: 1rem; }
-      .dates { display: flex; flex-wrap: wrap; gap: .7rem 2rem; margin-top: .5rem; }
-      .dates div + div { margin: 0; }
-      section { margin-top: 2rem; }
-      .comparison th, .comparison td, .demo td, .demo th { padding: .55rem .4rem; font-size: .9rem; }
-      .timeline li { grid-template-columns: 1fr; gap: .2rem; }
+    .citations { display: flex; flex-wrap: wrap; gap: .3rem 1rem; font-size: .9rem; margin-top: .6rem; }
+    .endlink { display: block; width: fit-content; margin: 1.7rem auto 0; }
+    .submission { border-block: 1px solid var(--line); padding: .8rem 0; margin-top: 1.7rem; }
+    summary { cursor: pointer; color: var(--teal); font-weight: 700; }
+    .submission ul { max-width: 85ch; }
+    @media (max-width: 690px) {
+      .wrap { width: calc(100% - 2rem); }
+      .choices, .timeline li { grid-template-columns: 1fr; }
+      .timeline li { gap: .2rem; }
+      .hero { padding-block: 1.4rem 1rem; }
+      td, th { padding: .4rem .2rem; font-size: .88rem; }
+    }
+    @media screen and (max-width: 690px) {
+      .comparison table, .comparison tbody, .comparison tr, .comparison td, .comparison tbody th { display: block; }
+      .comparison thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+      .comparison tbody tr { padding: .9rem; border-block-start: 2px solid var(--teal); }
+      .comparison tbody th:first-child, .comparison td { width: auto; padding: 0; border: 0; font-size: 1rem; }
+      .comparison td { margin-top: .6rem; }
+      .cell-label { display: block; font-size: .85rem; color: var(--muted); font-weight: 700; }
     }
     @media print {
-      @page { size: A4; margin: 16mm; }
-      body { background: white; color: black; font-size: 10pt; line-height: 1.7; }
-      .wrap { width: 100%; }
-      .mast, .mast *, .hero p, .imprint strong, .dates dt { background: white; color: #183e42; }
-      .mast { padding: 0; }
-      .hero { grid-template-columns: 1fr 11rem; gap: 1rem; padding-top: 1rem; }
-      h1 { font-size: 30pt; } h2 { font-size: 20pt; } h3 { font-size: 13pt; }
-      .contents, .skip, footer { display: none; }
-      section { margin-top: 1.2rem; }
-      #details, #demo, #plan { break-before: page; }
-      .ideas-grid { display: block; }
-      .idea { margin-top: .65rem; padding: .6rem .9rem; }
-      .idea header { padding-bottom: .3rem; }
-      .idea p, .idea dl, .idea dt, .citations { margin-top: .3rem; }
-      .idea, .pick, tr, .timeline li, .submission { break-inside: avoid; }
-      .timeline li { padding: .5rem 0; grid-template-columns: 7rem 1fr; }
-      .demo, .submission { padding: .75rem; }
+      .compare-link { display: none; }
+      .comparison { break-before: page; }
+      @page { size: A4; margin: 17mm; }
+      body { background: white; color: #111; font-size: 10pt; line-height: 1.7; }
+      .wrap, .guide { width: 100%; }
+      .mast, .imprint span { background: white; color: var(--ink); }
+      .imprint { padding-top: 0; border-bottom: 1px solid var(--line); }
+      .tools, .endlink, .open-guide, .submission:not([open]) { display: none; }
+      main:has(.screen:target, .screen :target) .submission { display: none; }
+      h1 { font-size: 26pt; }
+      .guide header { padding-block: .6rem; }
+      .guide h2 { font-size: 14pt; margin: 1rem 0 .3rem; }
+      .guide h3 { font-size: 11pt; }
+      .timeline li, tr, .choice { break-inside: avoid; }
       h2, h3 { break-after: avoid; }
-      a { color: #174c50; }
+      .timeline li { padding: .4rem 0; }
+      .choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
+
   </style>
 </head>
-<body id="top">
-  <a class="skip" href="#ideas">رفتن به مقایسهٔ ایده‌ها</a>
-  <header class="mast">
-    <div class="wrap">
-      <div class="imprint"><strong>هم‌ساز ایجنتیک</strong><span>راهنمای تیم سه‌نفره · آبان ۱۴۰۵</span></div>
-      <div class="hero">
-        <div>
-          <h1>در ۲۰ روز چه بسازیم؟</h1>
-          <p>پیشنهاد اول برای هم‌ساز، دستیاری است که پیش از ارسال پیشنهاد مناقصه، مدرک جاافتاده را پیدا کند و بند مربوط به آن را نشان دهد. برای آزمودن این ایده، یک سند عمومی و یک کارشناس فروش تجهیزات نقطهٔ شروع مناسبی‌اند.</p>
-        </div>
-        <dl class="dates">
-          <div><dt>مهلت تمدیدشدهٔ ثبت تیم</dt><dd>۶ آذر ۱۴۰۵</dd></div>
-          <div><dt>مهلت ارسال معرفی‌نامه و ویدیو</dt><dd>۲۰ آذر ۱۴۰۵</dd></div>
-        </dl>
-      </div>
-    </div>
-  </header>
-
-  <nav class="contents wrap" aria-label="فهرست سند">
-    <a href="#ideas">مقایسهٔ ایده‌ها</a>
-    <a href="#details">مشتری و نمونهٔ هر ایده</a>
-    <a href="#demo">دموی مناقصه</a>
-    <a href="#plan">برنامهٔ ۲۰ روزه</a>
-    <a href="#event">شرایط ارسال</a>
-  </nav>
-
+<body>
+  <div class="mast"><div class="wrap imprint"><b>هم‌ساز ایجنتیک</b><span>راهنمای تیم سه‌نفره · آبان ۱۴۰۵</span></div></div>
   <main class="wrap">
-    <section id="ideas" aria-labelledby="choice-heading">
-      <h2 id="choice-heading">برای آزمودن هر ایده به چه کسی نیاز دارید؟</h2>
-      <p class="intro">تا پایان روز دوم، کسی را پیدا کنید که همین کار را انجام می‌دهد و حاضر است یک نمونهٔ تازه را با ابزار شما بررسی کند. جدول نشان می‌دهد هر انتخاب به چه همکاری و چه ورودی‌ای نیاز دارد.</p>
-      <div class="comparison">
-        <table aria-label="مقایسهٔ امکان ساخت چهار ایده در بیست روز">
-          <thead><tr><th scope="col">ایده</th><th scope="col">همراه لازم برای آزمون</th><th scope="col">امکان ساخت در ۲۰ روز</th></tr></thead>
+    <div class="chooser" id="ideas" tabindex="-1">
+      <header class="hero">
+        <h1>کدام ایده را می‌سازید؟</h1>
+        <p>ایده‌ای را انتخاب کنید که بتوانید نمونه‌اش را به کاربر همان حوزه بسپارید. هر راهنما، مسیر ساخت، تقسیم کار سه نفر، برنامهٔ ۲۰ روزه و سناریوی ارائهٔ همان محصول را در اختیار تیم می‌گذارد.</p>
+        <a class="compare-link" href="#comparison">رفتن به مقایسهٔ مزایا و معایب ↓</a>
+      </header>
+      <section aria-labelledby="summary-heading">
+        <h2 class="section-title" id="summary-heading">چهار ایده در یک نگاه</h2>
+        <div class="choices">
+        <article class="choice">
+          <span class="field">فروش سازمانی</span>
+          <h3>کنترل پروندهٔ مناقصه</h3>
+          <p>دستیار سند خریدار را با پیشنهاد فروشنده می‌خواند و برای هر شرط، پاسخ و شمارهٔ صفحه را نشان می‌دهد. اگر خریدار مدت گارانتی خواسته باشد و فروشنده فقط مدل کالا را نوشته باشد، آن بند برای تکمیل مشخص می‌شود.</p>
+          <p class="need"><strong>برای شروع</strong> یک سند عمومی خرید تجهیزات و یک کارشناس فروش</p>
+          <a class="open-guide" href="#tender" aria-label="مشاهدهٔ راهنمای کنترل پروندهٔ مناقصه">مشاهدهٔ راهنما <span aria-hidden="true">←</span></a>
+        </article>
+        <article class="choice">
+          <span class="field">مالی و حسابداری</span>
+          <h3>تطبیق واریز با فاکتورهای باز</h3>
+          <p>دستیار مبلغ و شرح یک واریز را با فاکتورهای پرداخت‌نشده تطبیق می‌دهد. اگر دو ترکیب از فاکتورها به همان مبلغ برسند، هر دو را با دلیل به حسابدار نشان می‌دهد تا پیگیری کند.</p>
+          <p class="need"><strong>برای شروع</strong> دو فایل اکسل ساختگی و یک حسابدار شرکت پخش</p>
+          <a class="open-guide" href="#finance" aria-label="مشاهدهٔ راهنمای تطبیق واریز با فاکتورهای باز">مشاهدهٔ راهنما <span aria-hidden="true">←</span></a>
+        </article>
+        <article class="choice">
+          <span class="field">خدمات مشتری</span>
+          <h3>تشخیص موج اختلال از تیکت‌ها</h3>
+          <p>دستیار تیکت‌هایی را که با بیان‌های متفاوت از یک مشکل خبر می‌دهند کنار هم می‌گذارد. وقتی تعداد گزارش‌های مستقل بالا می‌رود، سرپرست یک هشدار همراه با زمان شروع و چند پیام نمونه می‌بیند.</p>
+          <p class="need"><strong>برای شروع</strong> تیکت‌های زمان‌دار ساختگی و یک سرپرست پشتیبانی</p>
+          <a class="open-guide" href="#support" aria-label="مشاهدهٔ راهنمای تشخیص موج اختلال از تیکت‌ها">مشاهدهٔ راهنما <span aria-hidden="true">←</span></a>
+        </article>
+        <article class="choice">
+          <span class="field">منابع انسانی</span>
+          <h3>تکمیل درخواست مأموریت و اصلاح تردد</h3>
+          <p>کارمند ماجرای ثبت‌نشدن تردد را به زبان خودش می‌نویسد. دستیار با یک سؤال روشن می‌کند کدام فرم لازم است، اطلاعات جاافتاده را می‌گیرد و پیش‌نویس را برای بازبینی و ارسال به سرپرست آماده می‌کند.</p>
+          <p class="need"><strong>برای شروع</strong> دو فرم نمونه و یک کارشناس منابع انسانی</p>
+          <a class="open-guide" href="#hr" aria-label="مشاهدهٔ راهنمای تکمیل درخواست مأموریت و اصلاح تردد">مشاهدهٔ راهنما <span aria-hidden="true">←</span></a>
+        </article>
+      </div>
+      </section>
+      <section class="comparison" id="comparison" aria-labelledby="compare-heading" tabindex="-1">
+        <h2 class="section-title" id="compare-heading">مقایسهٔ مزایا و معایب چهار ایده</h2>
+        <p>این مقایسه برای انتخاب نمونه‌ای است که سه نفر بتوانند در ۲۰ روز بسازند و با کاربر همان حوزه بیازمایند.</p>
+        <table aria-labelledby="compare-heading">
+          <thead>
+            <tr><th scope="col">ایده</th><th scope="col">مزایا</th><th scope="col">معایب و محدودیت‌ها</th></tr>
+          </thead>
           <tbody>
-            <tr><th scope="row"><a href="#tender">کنترل پروندهٔ مناقصه</a></th><td>کارشناس فروش تجهیزات</td><td>بالا، با اسناد متنی یک خانوادهٔ کالا</td></tr>
-            <tr><th scope="row"><a href="#finance">تطبیق واریز و فاکتور</a></th><td>حسابدار شرکت پخش</td><td>بالا، با دو فایل اکسل و پاسخ مرجع حسابدار</td></tr>
-            <tr><th scope="row"><a href="#support">کشف اختلال از روی تیکت‌ها</a></th><td>سرپرست پشتیبانی</td><td>متوسط، چون هشدار کاذب هم باید آزموده شود</td></tr>
-            <tr><th scope="row"><a href="#hr">تکمیل درخواست کارکنان</a></th><td>کارشناس منابع انسانی</td><td>بالا، با دو فرم و یک مسیر تأیید مشخص</td></tr>
+            <tr>
+              <th scope="row"><a href="#tender">کنترل پروندهٔ مناقصه</a></th>
+              <td><span class="cell-label" aria-hidden="true">مزایا</span>با یک سند عمومی می‌توان کار را شروع کرد. داور می‌تواند روی بند کلیک کند و خودش ببیند مدرک خواسته‌شده در پیشنهاد آمده است یا خیر.</td>
+              <td><span class="cell-label" aria-hidden="true">معایب و محدودیت‌ها</span>پاسخ یک شرط ممکن است بین متن و پیوست پخش شده باشد. اگر پیوست اسکن‌شده یا غایب باشد، نسخهٔ متنی برای تشخیص نقص به بازبینی کارشناس نیاز دارد.</td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="#finance">تطبیق واریز و فاکتور</a></th>
+              <td><span class="cell-label" aria-hidden="true">مزایا</span>با دو فایل اکسل می‌توان دمو را اجرا کرد. جمع مبلغ‌ها قابل‌بررسی است و حسابدار می‌تواند دقت هر پیشنهاد و زمان رسیدگی را اندازه بگیرد.</td>
+              <td><span class="cell-label" aria-hidden="true">معایب و محدودیت‌ها</span>دو ترکیب از فاکتورها ممکن است جمع یکسان داشته باشند. بدون شمارهٔ فاکتور یا توضیح مشتری، انتخاب قطعی ممکن نیست. پرداخت بخشی از یک فاکتور هم به منطق جداگانه نیاز دارد.</td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="#support">کشف اختلال از تیکت‌ها</a></th>
+              <td><span class="cell-label" aria-hidden="true">مزایا</span>سرپرست می‌تواند چند گزارش پراکنده را با یک هشدار به عملیات ارجاع دهد. با بازپخش پیام‌های زمان‌دار می‌شود فاصلهٔ اولین گزارش تا هشدار را دقیق سنجید.</td>
+              <td><span class="cell-label" aria-hidden="true">معایب و محدودیت‌ها</span>شلوغی عادی یا چند پیگیری از یک نفر می‌تواند هشدار کاذب بسازد. آستانه‌ای که روی پیام‌های ساختگی خوب عمل می‌کند، برای استفاده در شرکت به آزمون دوباره نیاز دارد.</td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="#hr">درخواست مأموریت و اصلاح تردد</a></th>
+              <td><span class="cell-label" aria-hidden="true">مزایا</span>دو فرم برای نمایش کل مسیر، از پیام کارمند تا کارتابل سرپرست، کافی است. تعداد درخواست‌هایی که در بار اول کامل می‌رسند معیار روشنی برای مقایسه با فرم دستی است.</td>
+              <td><span class="cell-label" aria-hidden="true">معایب و محدودیت‌ها</span>فیلدهای اجباری و مسئول تأیید در هر شرکت فرق می‌کند. اگر فرم دستی از قبل کوتاه باشد، سؤال‌های اضافهٔ دستیار حتی ممکن است زمان ثبت را بیشتر کند.</td>
+            </tr>
           </tbody>
         </table>
-      </div>
-      <p class="pick"><strong>تصمیم پیشنهادی برای تیم شما.</strong> مناقصه را در اولویت بگذارید، چون می‌توانید از روز اول یک پیشنهاد آزمایشی را مقابل شروط منتشرشدهٔ خریدار بسنجید. اگر تا روز دوم کارشناس فروش پیدا نکردید و یک حسابدار در دسترس بود، سراغ تطبیق واریز بروید. پاسخ‌های حسابدار به شما امکان می‌دهد حتی اشتباه‌های ظاهراً قانع‌کنندهٔ مدل را پیدا کنید.</p>
-    </section>
+      </section>
+      <p class="assumption">برآورد زمان با فرض کار روزانهٔ هر سه نفر و تجربهٔ ساخت برنامهٔ وب و استفاده از مدل‌های آماده در دست‌کم یک نفر از تیم است.</p>
+    </div>
+    <div class="screen" id="tender" tabindex="-1">
+      <nav class="tools" aria-label="گزینه‌های راهنما"><a href="#ideas">→ بازگشت به انتخاب ایده</a><button type="button" onclick="window.print()">چاپ راهنمای انتخاب‌شده</button></nav>
+      <article class="guide" id="guide-tender" aria-labelledby="title-tender">
+  <header><span class="field">فروش و توسعهٔ کسب‌وکار</span><h1 id="title-tender">دستیار کنترل پروندهٔ مناقصه</h1>
+    <p class="intro">کارشناس فروش سند خریدار و پیش‌نویس پیشنهاد را بارگذاری می‌کند. دستیار نشان می‌دهد کدام الزام پاسخ دارد، کدام مدرک جا افتاده و برای تکمیل پرونده باید سراغ چه کسی رفت.</p>
+  </header>
+  <h2>کاربر و خریدار</h2>
+  <p>مدیر فروش یک شرکت تأمین تجهیزات می‌خواهد بداند چه چیزی مانع ارسال پرونده است. در یک مناقصهٔ عمومی خرید دوربین، خریدار هم مشخصات فنی خواسته، هم تضمین و مدت گارانتی. سرویس‌هایی برای یافتن آگهی وجود دارد. این دستیار وقتی به کار می‌آید که فروشنده آگهی را انتخاب کرده و پیشنهادش را نوشته است.</p>
 
-    <section id="details" aria-labelledby="details-heading">
-      <h2 id="details-heading">مشتری چه کاری را به دستیار می‌سپارد؟</h2>
-      <p class="intro">نمونه‌های ایرانی زیر نشان می‌دهند این فرایندها در بازار وجود دارند. آمادگی مشتری برای خرید هر دستیار را باید جداگانه در گفت‌وگو و آزمون با کاربر سنجید.</p>
-      <div class="ideas-grid">
-        <article class="idea" id="tender">
-          <header><span class="field">فروش سازمانی</span><h3>بازبینی پیشنهاد پیش از ارسال به مناقصه</h3></header>
-          <p>مدیر فروش یک شرکت تأمین تجهیزات می‌خواهد بداند چه چیزی مانع ارسال پرونده است. در یک مناقصهٔ عمومی خرید دوربین، خریدار هم مشخصات فنی خواسته، هم تضمین و مدت گارانتی. سرویس‌هایی برای یافتن آگهی وجود دارد. این دستیار وقتی به کار می‌آید که فروشنده آگهی را انتخاب کرده و پیشنهادش را نوشته است.</p>
-          <dl><dt>نمونهٔ قابل‌ارائه</dt><dd>سند خریدار و پیشنهاد فروشنده را کنار هم بگذارد. برای هر شرط، عبارت پاسخ‌دهنده یا جای خالی آن را پیدا کند و کار بعدی را به کارشناس نشان دهد.</dd>
-          <dt>آزمون ارزش</dt><dd>یک کارشناس زمان مرور پرونده را اندازه بگیرد و مشخص کند کدام شرط‌ها جا افتاده یا با شاهد اشتباه، «کامل» اعلام شده‌اند.</dd></dl>
-          <div class="citations">
+            <div class="citations">
             <a href="https://www.kangancement.ir/wp-content/uploads/2023/02/%D8%B4%D8%B1%D8%A7%DB%8C%D8%B7-%D8%B4%D8%B1%DA%A9%D8%AA-%D8%AF%D8%B1-%D9%85%D9%86%D8%A7%D9%82%D8%B5%D9%87.pdf">سند عمومی خرید تجهیزات</a>
             <a href="https://apps.apple.com/us/app/tender-co/id1242200981">نمونهٔ سرویس آگهی مناقصه</a>
             <a href="https://quera.org/contest/assignments/109498/problems/365832">محور فروش کوئرا</a>
           </div>
-        </article>
 
-        <article class="idea" id="finance">
-          <header><span class="field">مالی و حسابداری</span><h3>پیدا کردن فاکتورهای مربوط به یک واریز</h3></header>
-          <p>مشتری سه فاکتور را یک‌جا تسویه کرده و در شرح پرداخت فقط نام فروشگاه را نوشته است. اگر جمع دو ترکیب متفاوت از فاکتورها با مبلغ واریز برابر باشد، حسابدار شرکت پخش برای انتخاب بین آن‌ها به مدرک بیشتری نیاز دارد. این پرونده‌های مبهم نقطهٔ ورود محصول به بازار مغایرت‌گیری‌اند.</p>
-          <dl><dt>نمونهٔ قابل‌ارائه</dt><dd>از دو فایل اکسل ساختگیِ گردش حساب و فاکتورهای باز استفاده کنید. کد، مبلغ‌ها و واحد پول را کنترل کند. مدل، شرح فارسی واریز را بخواند و شاهد هر تطبیق پیشنهادی را توضیح دهد.</dd>
-          <dt>آزمون ارزش</dt><dd>حسابدار پاسخ درست هر مورد را از پیش ثبت کند. بسنجید چند واریز درست تطبیق خورده و در چند مورد دستیار با وجود ابهام فقط یک پاسخ قطعی داده است.</dd></dl>
-          <div class="citations">
-            <a href="https://zamani.tax/software/bank-reconciliation">نمونهٔ ایرانی مغایرت‌گیری بانکی</a>
-            <a href="https://quera.org/contest/assignments/109498/problems/365830">مسئلهٔ دوم محور مالی کوئرا</a>
-          </div>
-        </article>
-
-        <article class="idea" id="support">
-          <header><span class="field">خدمات مشتری</span><h3>تشخیص یک اختلال مشترک از گزارش‌های پراکنده</h3></header>
-          <p>«کد ورود نمیاد» و «پشت صفحهٔ تأیید موندم» شاید دو نشانهٔ یک خرابی باشند. سرپرست پشتیبانی یک شرکت اینترنتی یا نرم‌افزاری باید تصمیم بگیرد چه زمانی موضوع را به تیم عملیات ارجاع دهد. سامانه‌های ایرانی امکان دسته‌بندی تیکت‌ها را دارند. این دستیار گزارش‌های مرتبط را در زمان وقوع اختلال کنار هم می‌گذارد.</p>
-          <dl><dt>نمونهٔ قابل‌ارائه</dt><dd>جریانی از پیام‌های ساختگی با زمان ثبت مشخص پخش کنید. دستیار با افزایش گزارش‌های مرتبط، یک هشدار همراه با پیام‌های نمونه و زمان شروع موج نشان دهد.</dd>
-          <dt>آزمون ارزش</dt><dd>یک دورهٔ پرترافیک عادی و یک دورهٔ دارای اختلال طراحی کنید. زمان اولین هشدار درست و تعداد هشدارهای اشتباه را جداگانه گزارش دهید.</dd></dl>
-          <div class="citations">
-            <a href="https://iransite.com/services/ticketing">نمونهٔ ایرانی سامانهٔ تیکتینگ</a>
-            <a href="https://quera.org/contest/assignments/109498/problems/365834">مسئلهٔ سوم محور خدمات مشتری کوئرا</a>
-          </div>
-        </article>
-
-        <article class="idea" id="hr">
-          <header><span class="field">منابع انسانی</span><h3>تکمیل درخواست مأموریت و اصلاح تردد</h3></header>
-          <p>تکنسین یک شرکت خدمات میدانی می‌نویسد «۸ آذر مستقیم رفتم پیش مشتری، برام کسری زده.» کارشناس منابع انسانی باید بداند مأموریت ثبت شده یا ساعت ورود جا افتاده است. در نرم‌افزارهای ایرانی برای این کار فرم و کارتابل وجود دارد. دستیار می‌تواند شرح کارمند را به درخواست قابل‌رسیدگی تبدیل کند.</p>
-          <dl><dt>نمونهٔ قابل‌ارائه</dt><dd>دستیار بپرسد «برای آن روز مأموریت ثبت کرده بودی؟» سپس اطلاعات لازم برای فرم مربوط را بگیرد. کارمند پیش‌نویس را ببیند و برای تأیید به کارتابل آزمایشی سرپرست بفرستد.</dd>
-          <dt>آزمون ارزش</dt><dd>با دو فرم، یک جدول مسئولان تأیید و ۲۰ پیام ساختگی شروع کنید. یک نفر فهم متن، یک نفر فرم و ارجاع، و نفر سوم آزمون با کارشناس را بر عهده بگیرد. نرخ تکمیل و ارجاع درست در بار اول را با روش دستی بسنجید.</dd></dl>
-          <div class="citations">
-            <a href="https://nanowatch.org/docs-app/">راهنمای درخواست‌های کارکنان در نانوواچ</a>
-            <a href="https://quera.org/contest/assignments/109498/problems/365831">مسئلهٔ سوم محور منابع انسانی کوئرا</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="demo" id="demo" aria-labelledby="demo-heading">
-      <h2 id="demo-heading">آنچه داور در دموی مناقصه می‌بیند</h2>
-      <p class="intro">مسیر پیشنهادی برای ثبت طرح «فروش و توسعهٔ کسب‌وکار» است، با تمرکز بر آماده‌سازی پیشنهاد فروش سازمانی. در دمو، داور نقش کارشناس فروش تجهیزات را دارد.</p>
-      <blockquote>«مدل دوربین و زمان تحویل را نوشته‌ام. قبل از ارسال، کدام شرط خریدار هنوز بی‌پاسخ مانده؟»</blockquote>
+  <h2>مسیر پیاده‌سازی</h2>
+  <ol>
+    <li>متن دو فایل فارسی را صفحه‌به‌صفحه بخوانید. هر الزام را با عبارت اصلی، شمارهٔ صفحه و نام پیوست ذخیره کنید.</li>
+    <li>برای هر الزام، عبارت مرتبط در پیشنهاد را بازیابی کنید. مدل شباهت معنایی عبارت‌ها را بررسی کند و کد، مبلغ، واحد پول و تاریخ را کنترل کند. اگر شاهدی پیدا نشد یا پیوست در دسترس نبود، آن را برای بررسی علامت بزنید.</li>
+    <li>کارشناس روی شاهد کلیک کند، متن اصلی را ببیند و برای مورد ناقص درخواست تکمیل بسازد. بعد از بارگذاری نسخهٔ اصلاح‌شده، نتیجه با شاهد تازه به‌روز شود.</li>
+  </ol>
+  <p>برای نمونهٔ ۲۰ روزه، یک خانوادهٔ کالا و فایل‌های متنی کافی است. خواندن اسکن‌های کم‌کیفیت، اتصال به سامانهٔ مناقصات و نوشتن کل پیشنهاد را برای مرحلهٔ بعد بگذارید.</p>
+  <h2 id="demo">سناریوی دمو</h2>
+        <blockquote>«مدل دوربین و زمان تحویل را نوشته‌ام. قبل از ارسال، کدام شرط خریدار هنوز بی‌پاسخ مانده؟»</blockquote>
       <p>داور سند متنی خریدار و پیشنهاد ساختگی فروشنده را بارگذاری می‌کند. جدول زیر یک نمونه از نتیجهٔ مورد انتظار است. در محصول، انتخاب هر شاهد باید همان عبارت را در صفحهٔ مربوط باز کند.</p>
       <table aria-label="نمونهٔ فرضی خروجی دستیار مناقصه">
         <thead><tr><th scope="col">شرط خریدار</th><th scope="col">شاهد در پیشنهاد</th><th scope="col">وضعیت</th><th scope="col">اقدام بعدی</th></tr></thead>
@@ -224,16 +232,9 @@
         </tbody>
       </table>
       <p>داور پیش‌نویس درخواست تکمیل را باز می‌کند، مدت گارانتی را به پیشنهاد می‌افزاید و بررسی را دوباره اجرا می‌کند. این بار ردیف گارانتی باید با ارجاع به متن تازه به‌روز شود. اگر پاسخ در پیوستی باشد که بارگذاری نشده، دستیار نام همان پیوست را از کاربر بخواهد.</p>
-      <h3>مرز نسخهٔ اول</h3>
-      <p>روی یک خانوادهٔ کالا و فایل‌های متنی فارسی تمرکز کنید. مدل، عبارت‌های هم‌معنی را در دو سند پیدا کند. مبلغ، تاریخ و واحد ریال یا تومان را با کد بررسی کنید و تأیید نهایی را به کارشناس بسپارید. خواندن اسکن‌های کم‌کیفیت، اتصال به سامانهٔ مناقصات و نوشتن کل پیشنهاد در برنامهٔ توسعهٔ بعدی جا می‌گیرند.</p>
-      <h3>اولین گفت‌وگوی فروش</h3>
-      <p>از مدیر بازرگانی بپرسید «آخرین پرونده را چه کسی بررسی کرد؟ چقدر طول کشید و چه چیزی برای اصلاح برگشت؟ اختیار خرید ابزار با کیست؟» تعداد پرونده‌های ماهانه و هزینهٔ بازبینی کمک می‌کند دو فرضیهٔ قیمت‌گذاری را بسنجید: اشتراک تیمی برای فروشندگان پرکار و پرداخت به‌ازای پرونده برای فروشندگان کم‌تکرار.</p>
-    </section>
 
-    <section id="plan" aria-labelledby="plan-heading">
-      <h2 id="plan-heading">برنامهٔ ۲۰ روزهٔ تیم برای دستیار مناقصه</h2>
-      <p class="intro">این برآورد زمانی وقتی واقع‌بینانه است که هر سه نفر روزانه زمان متمرکز بگذارند و دست‌کم یک نفر تجربهٔ ساخت برنامهٔ وب و کار با رابط برنامه‌نویسی مدل داشته باشد.</p>
-      <p class="roles"><strong>تقسیم مسئولیت.</strong> نفر اول متن و شاهد هر الزام را استخراج کند. نفر دوم بارگذاری، جدول نتایج و نمایش سند را بسازد. نفر سوم مصاحبه‌ها، پاسخ‌های مرجع و آزمون مستقل را پیش ببرد.</p>
+  <h2 id="plan">تقسیم کار و برنامهٔ ۲۰ روزه</h2>
+        <p class="roles"><strong>تقسیم مسئولیت.</strong> نفر اول متن و شاهد هر الزام را استخراج کند. نفر دوم بارگذاری، جدول نتایج و نمایش سند را بسازد. نفر سوم مصاحبه‌ها، پاسخ‌های مرجع و آزمون مستقل را پیش ببرد.</p>
       <ol class="timeline">
         <li><strong>روز ۱ و ۲</strong><div><h3>دسترسی به مسئله را تأیید کنید</h3><p>با سه کارشناس دربارهٔ آخرین پیشنهادشان صحبت کنید و سه سند عمومی از یک خانوادهٔ کالا پیدا کنید. تا پایان روز دوم، با یک کارشناس برای آزمون روز پانزدهم قرار بگذارید.</p></div></li>
         <li><strong>روز ۳ تا ۵</strong><div><h3>پاسخ درست را پیش از ساخت بنویسید</h3><p>شرط‌ها و شمارهٔ صفحه‌ها را دستی ثبت کنید. یک پیشنهاد کامل، یک پیشنهاد ناقص و یک مورد مبهم بسازید. یک سند تازه را برای روز آزمون کنار بگذارید.</p></div></li>
@@ -242,19 +243,134 @@
         <li><strong>روز ۱۶ تا ۱۸</strong><div><h3>نتیجه را قابل‌گزارش کنید</h3><p>روی پرونده‌های هم‌سطح، زمان مرور دستی و زمان مرور با دستیار را اندازه بگیرید. تعداد پرونده و الزام، خطاهای هر روش و زمان صرف‌شده را ثبت کنید. خطاهای مهم را پیش از ضبط ویدیو اصلاح کنید.</p></div></li>
         <li><strong>روز ۱۹ و ۲۰</strong><div><h3>ارائه را با یک پروندهٔ تازه تمام کنید</h3><p>در ویدیو نشان دهید داور چگونه مدرک حذف‌شده را پیدا می‌کند، شاهد را می‌بیند و بعد از تکمیل پرونده، نتیجهٔ جدید می‌گیرد. معرفی‌نامه را با اندازه‌گیری واقعی و یک محدودیت شناخته‌شده تکمیل کنید.</p></div></li>
       </ol>
-    </section>
 
-    <section class="submission" id="event" aria-labelledby="event-heading">
-      <h2 id="event-heading">برای مرحلهٔ اول چه تحویل بدهیم؟</h2>
+  <h2>آزمون ارزش و مدل درآمد</h2>
+  <p>با کارشناس فروش، زمان بازبینی و تعداد الزام‌هایی را که روی پروندهٔ تازه درست تشخیص داده شده‌اند ثبت کنید. مواردی را که پیشنهاد ناقص به‌اشتباه کامل تشخیص داده شده جداگانه بشمارید. از مدیر بازرگانی بپرسید آخرین پرونده چرا برای اصلاح برگشت و ماهانه چند پیشنهاد را بازبینی می‌کند. با این پاسخ‌ها می‌توانید اشتراک تیمی یا پرداخت به‌ازای پرونده را با خریدار بسنجید.</p>
+</article>
+      <a class="endlink" href="#ideas">بازگشت به چهار ایده</a>
+    </div>
+    <div class="screen" id="finance" tabindex="-1">
+      <nav class="tools" aria-label="گزینه‌های راهنما"><a href="#ideas">→ بازگشت به انتخاب ایده</a><button type="button" onclick="window.print()">چاپ راهنمای انتخاب‌شده</button></nav>
+      <article class="guide" id="guide-finance" aria-labelledby="title-finance">
+  <header><span class="field">مالی و حسابداری</span><h1 id="title-finance">دستیار تطبیق واریز با فاکتورهای باز</h1>
+    <p class="intro">یک مشتری با یک واریز، چند فاکتور را تسویه می‌کند. حسابدار شرکت پخش باید بداند کدام فاکتورها را ببندد و برای کدام واریز از مشتری توضیح بخواهد. خروجی نمونه، فهرست تطبیق‌های پیشنهادی با دلیل و امکان بازبینی است.</p>
+  </header>
+  <h2>کاربر، خریدار و مسئلهٔ بازار</h2>
+  <p>کاربر روزانه حسابدار دریافتنی‌هاست و خریدار احتمالی مدیر مالی شرکت پخش است. ابزارهای ایرانیِ مغایرت‌گیری، تطبیق گردش بانک با دفاتر را پوشش می‌دهند. فرصت پیشنهادی در یک مرحلهٔ مشخص است: وقتی شرح واریز ناقص است، حسابدار بتواند ترکیب‌های محتمل فاکتورها را بررسی کند. از او بخواهید آخرین مورد مبهم را بدون اطلاعات مشتری شرح دهد و بگوید چه مدرکی تصمیمش را تغییر داد. <a href="https://zamani.tax/software/bank-reconciliation">نمونهٔ ایرانی مغایرت‌گیری</a> · <a href="https://quera.org/contest/assignments/109498/problems/365830">مسئلهٔ دوم محور مالی کوئرا</a></p>
+  <h2>مسیر پیاده‌سازی</h2>
+  <ol>
+    <li>دو فایل اکسل ساختگی وارد کنید. فایل واریزها شامل شناسه، تاریخ، مبلغ، واحد و شرح باشد. فایل فاکتورها شامل شناسهٔ فاکتور، مشتری، مانده و واحد پول باشد. کاربر پیش از تطبیق، واحد هر فایل را تأیید کند.</li>
+    <li>مبلغ‌ها را با عدد صحیح به یک واحد تبدیل کنید. از متن فارسی نام مشتری یا شمارهٔ فاکتور را استخراج کنید و عبارت اصلی شرح را کنار آن نگه دارید. برای نمونهٔ اول، ترکیب‌های یک تا سه فاکتورِ باز از همان مشتری را بررسی کنید.</li>
+    <li>کد، برابری جمع مبلغ‌ها را کنترل کند. رابط، ترکیب‌های سازگار را همراه با شاهد واریز نمایش دهد. حسابدار پیشنهاد را تأیید یا رد کند، یا برای پیگیری کنار بگذارد. پس از تأیید، همان فاکتور در پیشنهادهای تأییدشدنی دیگر دوباره مصرف نشود.</li>
+  </ol>
+  <h2>سناریوی دموی پنج‌دقیقه‌ای</h2>
+  <p>چهار فاکتور باز برای «فروشگاه بهار» بسازید. مبلغ فاکتورهای ۱۰۱ تا ۱۰۴ به‌ترتیب <strong>۷، ۵، ۸ و ۴ میلیون تومان</strong> باشد. یک واریز ۱۲ میلیون تومانی با شرح «تسویه بهار» وارد کنید. دستیار هر دو ترکیب ۱۰۱ + ۱۰۲ و ۱۰۳ + ۱۰۴ را نشان می‌دهد. حسابدار واریز را برای پیگیری کنار می‌گذارد، چون شرح اولیه بین دو ترکیب تمایز ایجاد نمی‌کند.</p>
+  <p>اکنون یک یادداشت ساختگیِ پیگیری اضافه کنید: «بابت فاکتورهای ۱۰۳ و ۱۰۴». دستیار بار دیگر جمع مبلغ را کنترل می‌کند، عبارت مربوط را کنار پیشنهاد می‌آورد و حسابدار تطبیق را تأیید می‌کند. در پایان، تغییر وضعیت دو فاکتور و بازماندن دو فاکتور دیگر را نشان دهید.</p>
+  <h2>تقسیم کار و برنامهٔ ۲۰ روزه</h2>
+  <p class="roles">نفر اول ورود فایل، محاسبه و کنترل تخصیص را بسازد. نفر دوم استخراج اطلاعات از شرح فارسی و صفحهٔ بازبینی را پیاده کند. نفر سوم مصاحبه با حسابدار، نمونه‌های ساختگی، پاسخ مرجع و ارائه را پیش ببرد.</p>
+  <ol class="timeline">
+    <li><strong>روز ۱ و ۲</strong><div><h3>روال فعلی را ثبت کنید</h3><p>با حسابدار دربارهٔ تسویهٔ چند فاکتور صحبت کنید. موارد پرتکرار و مدارکی را که برای رفع ابهام می‌خواهد بنویسید و برای آزمون روز پانزدهم قرار بگذارید.</p></div></li>
+    <li><strong>روز ۳ تا ۵</strong><div><h3>پروندهٔ مرجع بسازید</h3><p>۲۰ واریز ساختگی با جواب مشخص طراحی کنید. نمونهٔ تک‌فاکتوری، چندفاکتوری، دو ترکیب هم‌مبلغ و واریز بدون شاهد را بگنجانید. بخشی از موارد را تا روز آزمون کنار بگذارید.</p></div></li>
+    <li><strong>روز ۶ تا ۱۰</strong><div><h3>اولین تطبیق را اجرا کنید</h3><p>دو فایل را وارد کنید، خطاهای واحد و ستون را نشان دهید و از روی شرح، مشتری را پیدا کنید. برای هر پیشنهاد، مبلغ و شناسهٔ فاکتورها باید قابل بازبینی باشد.</p></div></li>
+    <li><strong>روز ۱۱ تا ۱۵</strong><div><h3>ابهام را به حسابدار برگردانید</h3><p>صف پیگیری، یادداشت تکمیلی و تأیید حسابدار را اضافه کنید. از حسابدار بخواهید موارد کنارگذاشته‌شده را ببیند و پیشنهاد بی‌پشتوانه را مشخص کند.</p></div></li>
+    <li><strong>روز ۱۶ تا ۱۸</strong><div><h3>زمان و خطا را اندازه بگیرید</h3><p>روی دو دستهٔ هم‌سطح، زمان رسیدگی دستی و با دستیار را ثبت کنید. خطا در تبدیل واحد، تخصیص دوباره و پیشنهاد قطعی در پروندهٔ مبهم را جداگانه بشمارید.</p></div></li>
+    <li><strong>روز ۱۹ و ۲۰</strong><div><h3>نتیجه را ارائه کنید</h3><p>دموی یک واریز مبهم را ضبط کنید. در معرفی‌نامه، تعداد موارد آزموده‌شده، نتیجهٔ بررسی حسابدار و دامنهٔ پوشش نمونه را بنویسید.</p></div></li>
+  </ol>
+  <h2>آزمون ارزش و مدل درآمد</h2>
+  <p>موفقیت را با تعداد تطبیق‌های درستِ تأییدشده، موارد مبهمی که به کارشناس رسیدند و زمان رسیدگی بسنجید. برای آزمون فرضیهٔ اشتراک ماهانه از مدیر مالی بپرسید در ماه چند واریز به بررسی دستی می‌رسد و برای ارزیابی ابزار روی یک دورهٔ آزمایشی چه نتیجه‌ای می‌خواهد. دامنهٔ نمونه را به فایل‌های ساختگی و تسویهٔ کامل فاکتورها محدود کنید؛ نیم‌پرداخت و اتصال به نرم‌افزار حسابداری را می‌توانید در مرحلهٔ بعد بسازید.</p>
+</article>
+      <a class="endlink" href="#ideas">بازگشت به چهار ایده</a>
+    </div>
+    <div class="screen" id="support" tabindex="-1">
+      <nav class="tools" aria-label="گزینه‌های راهنما"><a href="#ideas">→ بازگشت به انتخاب ایده</a><button type="button" onclick="window.print()">چاپ راهنمای انتخاب‌شده</button></nav>
+      <article class="guide" id="guide-support" aria-labelledby="title-support">
+  <header>
+    <span class="field">خدمات مشتری</span>
+    <h1 id="title-support">کشف اختلال مشترک از تیکت‌های فارسی</h1>
+    <p class="intro">وقتی چند مشتری یک خرابی را با عبارت‌های متفاوت گزارش می‌کنند، سرپرست پشتیبانی باید تشخیص دهد چه زمانی مجموع این گزارش‌ها ارزش ارجاع به تیم عملیات را دارد. خروجی دستیار یک هشدار همراه با زمان شروع، دامنهٔ مشکل و نمونهٔ پیام‌هاست.</p>
+  </header>
+
+  <h2>کاربر و فرصت بازار</h2>
+  <p>کاربر روزانه سرپرست شیفت پشتیبانی یک شرکت نرم‌افزاری یا اینترنتی است. مدیر خدمات مشتری می‌تواند خریدار پایلوت باشد. سامانه‌های تیکتینگ ایرانی امکاناتی مانند دسته‌بندی و ارجاع دارند. در مصاحبه، آخرین اختلال را بازسازی کنید: چه کسی شباهت گزارش‌ها را دید، چه زمانی عملیات را خبر کرد و برای ارجاع چه شواهدی لازم داشت؟</p>
+  <p class="citations"><a href="https://iransite.com/services/ticketing">نمونهٔ ایرانی سامانهٔ تیکتینگ</a><a href="https://quera.org/contest/assignments/109498/problems/365834">مسئلهٔ سوم محور خدمات مشتری کوئرا</a></p>
+
+  <h2>مسیر پیاده‌سازی</h2>
+  <p>برای نمونهٔ اول، یک خدمت مثل «ورود با رمز یک‌بارمصرف» را انتخاب کنید. فایل تیکت‌های ساختگی شامل شناسهٔ تیکت، شناسهٔ ساختگی گزارش‌دهنده، زمان، متن و نام خدمت باشد. متن فارسی را یکدست کنید و پیام‌های هم‌معنا را با مدل زبانی یا شباهت معنایی گروه‌بندی کنید. کد، تعداد گزارش‌های مستقل هر گروه را در یک بازهٔ زمانی بشمارد و آن را با بازه‌های عادی همان خدمت بسنجد. گزارش تکراری یک کاربر فقط یک بار شمرده شود.</p>
+  <p>در صفحهٔ سرپرست، کنار هر هشدار سه چیز دیده شود: نخستین زمان مشاهده، روند تعداد گزارش‌ها و پیام‌هایی که آن را توضیح می‌دهند. سرپرست می‌تواند هشدار را تأیید یا رد کند و خلاصه‌ای برای ارجاع به عملیات بگیرد. برای اجرای ۲۰ روزه، بازپخش یک فایل و ثبت تصمیم سرپرست در خود برنامه کافی است.</p>
+
+  <h2>دموی پنج‌دقیقه‌ای</h2>
+  <ol>
+    <li>یک بازهٔ شلوغِ ساختگی را پخش کنید. درخواست‌های متنوع دربارهٔ تمدید اشتراک و نحوهٔ ورود می‌رسند. تعداد کل تیکت‌ها بالا می‌رود و داور می‌بیند که صرف افزایش ترافیک، هشداری ایجاد نمی‌کند.</li>
+    <li>در بازهٔ بعد، چند کاربر مستقل می‌نویسند «رمز پیامکی نمیاد» یا «روی صفحهٔ کد موندم». هشدار با عنوان «احتمال اختلال در دریافت کد ورود» ظاهر می‌شود. داور پیام‌های زیر آن و زمان اولین گزارش را باز می‌کند.</li>
+    <li>یک پیگیری تکراری و یک پرسش آموزشی دربارهٔ تغییر شماره وارد کنید. شمار گزارش‌های مستقل را دوباره ببینید. سرپرست پس از مرور شواهد، خلاصهٔ اختلال را برای ارجاع آماده می‌کند.</li>
+  </ol>
+
+  <h2>تقسیم کار و برنامهٔ ۲۰ روزه</h2>
+  <p class="roles">نفر اول روی درک متن و گروه‌بندی کار کند. نفر دوم بازپخش تیکت‌ها، شمارش و صفحهٔ هشدار را بسازد. نفر سوم با سرپرست پشتیبانی سناریوها، پاسخ مرجع و روایت ارائه را آماده کند.</p>
+  <ol class="timeline">
+    <li><strong>روز ۱ و ۲</strong><div><h3>یک اختلال پرتکرار انتخاب کنید</h3><p>از سرپرست بخواهید بدون ارائهٔ اطلاعات مشتری، ترتیب کشف یک اختلال را شرح دهد. خدمت هدف و شرایط ارجاع هشدار را با او مشخص کنید.</p></div></li>
+    <li><strong>روز ۳ تا ۵</strong><div><h3>تیکت‌های مرجع را بنویسید</h3><p>برای بازهٔ عادی، ازدحام بدون خرابی و اختلال واقعی، جریان‌های ساختگی بسازید. زمان شروع و پیام‌های متعلق به هر رخداد را جدا ثبت کنید. چند جریان را برای آزمون نهایی کنار بگذارید.</p></div></li>
+    <li><strong>روز ۶ تا ۱۰</strong><div><h3>اولین هشدار را بسازید</h3><p>یک فایل را از ابتدا بازپخش کنید. داور باید بتواند از هشدار به پیام‌های سازندهٔ آن برسد و دلیل عبور تعداد گزارش‌ها از آستانه را ببیند.</p></div></li>
+    <li><strong>روز ۱۱ تا ۱۵</strong><div><h3>هشدارهای گمراه‌کننده را بررسی کنید</h3><p>پیگیری تکراری، دو مشکل هم‌زمان و عبارت‌های مشابه با معنای متفاوت را امتحان کنید. سرپرست گروه‌ها را بازبینی کند و دلیل رد هر هشدار را ثبت کند.</p></div></li>
+    <li><strong>روز ۱۶ تا ۱۸</strong><div><h3>روی توالی‌های تازه اندازه بگیرید</h3><p>تنظیمات را ثابت نگه دارید و جریان‌های کنارگذاشته‌شده را اجرا کنید. نتیجه را با شمارش سادهٔ تیکت‌های هر بازه مقایسه کنید.</p></div></li>
+    <li><strong>روز ۱۹ و ۲۰</strong><div><h3>پروندهٔ ارائه را ببندید</h3><p>ویدیو را با یک بازهٔ عادی، یک هشدار درست و تصمیم سرپرست ضبط کنید. تعداد سناریوها، زمان کشف و موارد خطای مشاهده‌شده را در معرفی‌نامه شرح دهید.</p></div></li>
+  </ol>
+
+  <h2>معیار پذیرش و درآمد احتمالی</h2>
+  <p>برای هر رخداد از پیش برچسب‌خورده، فاصلهٔ نخستین گزارش مرتبط تا نخستین هشدار درست را حساب کنید. شمار رخدادهای کشف‌نشده و هشدارهای کاذب در بازه‌های عادی را نیز گزارش کنید. برای آزمودن فرضیهٔ اشتراک ماهانه به‌ازای تیم پشتیبانی، از مدیر بخواهید روی یک رخداد گذشته تخمین بزند کشف زودتر چه تغییری در تعداد پیگیری‌ها یا زمان کارشناسان ایجاد می‌کرد.</p>
+</article>
+      <a class="endlink" href="#ideas">بازگشت به چهار ایده</a>
+    </div>
+    <div class="screen" id="hr" tabindex="-1">
+      <nav class="tools" aria-label="گزینه‌های راهنما"><a href="#ideas">→ بازگشت به انتخاب ایده</a><button type="button" onclick="window.print()">چاپ راهنمای انتخاب‌شده</button></nav>
+      <article class="guide" id="guide-hr" aria-labelledby="title-hr">
+  <header>
+    <span class="field">منابع انسانی</span>
+    <h1 id="title-hr">دستیار مأموریت و اصلاح تردد</h1>
+    <p class="intro">تکنسینی که مستقیم به محل مشتری می‌رود ممکن است در گزارش حضور و غیاب کسری ببیند. با این دستیار، ماجرا را به زبان خودش تعریف می‌کند، فرم مناسب را تکمیل می‌کند و همان‌جا می‌بیند چه کسی باید آن را بررسی کند.</p>
+  </header>
+
+  <h2>کاربر، خریدار و مسئلهٔ بازار</h2>
+  <p>کاربر اول، کارمند شرکت خدمات میدانی است. سرپرست درخواست را بررسی می‌کند و مدیر منابع انسانی خریدار احتمالی است. سامانهٔ ایرانی نانوواچ برای مأموریت و فراموشی ثبت تردد، فرم و کارتابل تأیید دارد. در اولین مصاحبه از کارشناس منابع انسانی بخواهید مسیر آخرین درخواست برگشتی را شرح دهد. ببینید مشکل از انتخاب فرم بوده، از اطلاعات ناقص یا از ارسال به مسئول اشتباه. <a href="https://nanowatch.org/docs-app/">راهنمای درخواست‌های کارکنان در نانوواچ</a> · <a href="https://quera.org/contest/assignments/109498/problems/365831">مسئلهٔ سوم محور منابع انسانی کوئرا</a></p>
+
+  <h2>مسیر پیاده‌سازی</h2>
+  <ol>
+    <li><strong>دو فرم را تعریف کنید.</strong> برای یک شرکت فرضی، فیلدهای الزامی «مأموریت ساعتی» و «اصلاح ورود یا خروج» و مسئول تأیید هرکدام را در یک فایل تنظیمات بنویسید. داده‌های نمونهٔ کارمندان و شعب را ساختگی نگه دارید.</li>
+    <li><strong>شرح کارمند را به پیش‌نویس تبدیل کنید.</strong> مدل از پیام فارسی، نوع درخواست و فیلدهایی را که صریحاً بیان شده‌اند استخراج کند. وقتی مأموریت و اصلاح تردد هر دو محتمل‌اند، کارمند با پاسخ به یک سؤال مسیر را روشن کند.</li>
+    <li><strong>فرم را با قواعد شرکت کنترل کنید.</strong> برنامه تاریخ، ترتیب ساعت‌ها و فیلدهای خالی را بررسی کند. کارمند بتواند همهٔ مقادیر را ببیند و اصلاح کند. پس از تأیید او، یک درخواست با شناسهٔ پیگیری در کارتابل آزمایشی مسئول تعیین‌شده ثبت شود.</li>
+  </ol>
+
+  <h2>سناریوی دمو</h2>
+  <p>کارمند می‌نویسد «۸ آذر مستقیم رفتم پیش مشتری و برام کسری زده.» دستیار می‌پرسد «می‌خواهی بازهٔ کار در محل مشتری را به‌عنوان مأموریت ثبت کنی یا یکی از ساعت‌های ورود و خروجت را اصلاح کنی؟» کارمند پاسخ می‌دهد «مأموریت بود، از ساعت ۸ تا ۱۱.» در فرم نمونه، محل مأموریت هم لازم است. دستیار فقط همان را می‌پرسد و تاریخ و ساعت‌های قبلی را در پیش‌نویس نشان می‌دهد. داور ساعت پایان را به ۱۱:۳۰ تغییر می‌دهد، درخواست را تأیید می‌کند و همان ساعت اصلاح‌شده را در کارتابل سرپرست می‌بیند.</p>
+  <p>برای نمایش مسیر دوم، یک پیام تازه دربارهٔ فراموشی ثبت خروج وارد کنید. برنامه باید فرم اصلاح تردد را باز کند و ساعت خروج را از کاربر بگیرد. تصمیم نهایی دربارهٔ کارکرد با مسئول تأیید است.</p>
+
+  <h2>برنامهٔ ۲۰ روزهٔ سه نفر</h2>
+  <p class="roles"><strong>تقسیم کار.</strong> نفر اول استخراج فیلدها و تشخیص ابهام را پیش ببرد. نفر دوم فرم‌ها، اعتبارسنجی و کارتابل را بسازد. نفر سوم گردش کار را با کارشناس مرور کند و پیام‌های آزمون، پاسخ مرجع و ارائه را آماده کند.</p>
+  <ol class="timeline">
+    <li><strong>روز ۱ و ۲</strong><div><h3>شناخت درخواست‌های برگشتی</h3><p>با کارشناس منابع انسانی و یک سرپرست گفتگو کنید. برای هر فرم، اطلاعات ضروری و مسئول تأیید را ثبت کنید و برای آزمون روز پانزدهم زمان بگیرید.</p></div></li>
+    <li><strong>روز ۳ تا ۵</strong><div><h3>فرم و پاسخ مرجع</h3><p>دو فرم فرضی بسازید. ۲۰ پیام ساختگیِ جدا از نمونه‌های توسعه برای آزمون نهایی کنار بگذارید. نوع درخواست، فیلدهای موجود و سؤال لازم هر پیام را با کارشناس مشخص کنید.</p></div></li>
+    <li><strong>روز ۶ تا ۱۰</strong><div><h3>تکمیل یک درخواست از ابتدا تا انتها</h3><p>تا پایان روز دهم، دست‌کم یک درخواست مأموریت از پیام فارسی به فرم قابل‌ویرایش و سپس به کارتابل سرپرست برسد.</p></div></li>
+    <li><strong>روز ۱۱ تا ۱۵</strong><div><h3>اصلاح تردد و رفع ابهام</h3><p>مسیر دوم را اضافه کنید. با کارشناس مواردی مثل تاریخ مبهم، نداشتن ساعت پایان و ویرایش پیش از ارسال را بررسی کنید.</p></div></li>
+    <li><strong>روز ۱۶ تا ۱۸</strong><div><h3>مقایسه با فرم دستی</h3><p>۲۰ سناریو را بین دو روش تقسیم و برای دور دوم روش‌ها را جابه‌جا کنید. تعداد درخواست‌های کامل و درست‌ارجاع‌شده در بار اول، زمان تکمیل و سؤال‌های تکراری را برای هر روش ثبت کنید.</p></div></li>
+    <li><strong>روز ۱۹ و ۲۰</strong><div><h3>تحویل دمو و نتایج</h3><p>در ویدیوی پنج‌دقیقه‌ای، یک پیام مبهم، یک اصلاح به‌دست کاربر و رسیدن درخواست به کارتابل را نشان دهید. یک خطای واقعی آزمون و نتیجهٔ اندازه‌گیری را در معرفی‌نامه بیاورید.</p></div></li>
+  </ol>
+
+  <h2>امکان ساخت و فرضیهٔ درآمد</h2>
+  <p>ساخت نمونه در ۲۰ روز با دو فرم، یک شرکت فرضی و کارتابل محلی شدنی است. اتصال به دستگاه حضور و غیاب و حقوق و دستمزد می‌تواند موضوع پایلوت بعدی باشد. برای آزمون اشتراک سازمانی، از مدیر منابع انسانی تعداد درخواست‌های برگشتی ماه گذشته و زمان معمول رسیدگی مجدد را بپرسید. اگر آزمون تیم کاهش رفت‌وبرگشت را نشان داد، دربارهٔ اجرای آزمایشی در یک شعبه و بودجهٔ آن گفتگو کنید.</p>
+</article>
+      <a class="endlink" href="#ideas">بازگشت به چهار ایده</a>
+    </div>
+    <details class="submission" id="event">
+      <summary>مهلت‌ها و شیوهٔ ارسال به هم‌ساز</summary>
       <ul>
         <li><strong>ثبت تیم.</strong> تیم سه‌نفره می‌تواند با یک ایده وارد شود. مهلت ثبت‌نام و ثبت اولیهٔ گروه تا ساعت ۲۳:۵۹ روز ۶ آذر ۱۴۰۵ تمدید شده است. <a href="https://hamsazplus.ir/">تقویم رسمی هم‌ساز</a></li>
         <li><strong>انتخاب حوزه.</strong> مثال‌های کوئرا برای ایده‌پردازی‌اند. می‌توانید مسئلهٔ خود را در مالی، منابع انسانی، فروش، حقوقی یا خدمات مشتری ثبت کنید. برای فرایندهای سازمانی دیگر هم بخش «سایر حوزه‌ها» پیش‌بینی شده است. <a href="https://quera.org/contest/assignments/109498/problems">حوزه‌های مسابقه</a></li>
         <li><strong>فایل ارائه و ویدیو.</strong> تا ساعت ۲۳:۵۹ روز ۲۰ آذر ۱۴۰۵، معرفی‌نامهٔ ۹ پرسشی و ویدیوی ۵ دقیقه‌ای ارائه را ارسال کنید. پیوند دمو در قالب رسمی اختیاری است. <a href="https://quera.org/qbox/download/252cMP5Z8t/Hamsaz-Agentic_Moarefi-Nameh.pptx">قالب پاورپوینت</a> · <a href="https://quera.org/qbox/download/KRN1bbtEFe/Hamsaz-Agentic_Moarefi-Nameh.pdf">نسخهٔ PDF قالب</a></li>
         <li><strong>بستهٔ نهایی.</strong> فایل ارائه و ویدیو را در یک فایل ZIP بگذارید. اگر حجم از ۲۰ مگابایت بیشتر شد، ویدیو را بارگذاری کنید و لینک آن را در یک فایل متنی، کنار ارائه بگذارید. پیش از ثبت ارسال نهایی، لینک را در پنجرهٔ ناشناس مرورگر امتحان کنید. <a href="https://quera.org/contest/assignments/109498/problems/365836">دستورالعمل ارسال در کوئرا</a></li>
-        <li><strong>مدل و داده.</strong> استفاده از مدل و ابزار آماده با اعلام آن مجاز است. استفاده از دادهٔ واقعی مشتریان ممنوع است. برای نمونه از اسناد عمومی و پیشنهادهای ساختگی استفاده کنید. در مرحلهٔ بعد، محصول در محیط سازمانی تازه ارزیابی می‌شود. <a href="https://hamsazplus.ir/#faq">مراحل و پرسش‌های رسمی هم‌ساز</a></li>
+        <li><strong>مدل و داده.</strong> استفاده از مدل و ابزار آماده با اعلام آن مجاز است. استفاده از دادهٔ واقعی مشتریان ممنوع است. برای نمونه از اسناد عمومی و داده‌های ساختگی استفاده کنید. در مرحلهٔ بعد، محصول در محیط سازمانی تازه ارزیابی می‌شود. <a href="https://hamsazplus.ir/#faq">مراحل و پرسش‌های رسمی هم‌ساز</a></li>
       </ul>
-    </section>
+
+    </details>
   </main>
-  <footer class="wrap"><a href="#top">بازگشت به ابتدای سند ↑</a></footer>
 </body>
 </html>
